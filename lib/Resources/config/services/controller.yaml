@@ -1,0 +1,14 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: true
+    
+    Vankosoft\SyliusMultiVendor\Controller\DashboardController:
+        tags: ['controller.service_arguments']
+        autowire: false
+        arguments:
+            - '@doctrine'
+            - '@odiseo_sylius_vendor_plugin.repository.vendor'
+
+
