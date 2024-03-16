@@ -7,6 +7,7 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Product\Generator\SlugGeneratorInterface;
 use Doctrine\Persistence\ObjectManager;
 use Webmozart\Assert\Assert;
 
@@ -20,6 +21,9 @@ final class UserRegistrationListener
     /** @var ChannelContextInterface */
     private $channelContext;
     
+    /** @var SlugGeneratorInterface */
+    private $slugGenerator;
+    
     /** @var RepositoryInterface */
     private $vendorsRepository;
     
@@ -29,11 +33,13 @@ final class UserRegistrationListener
     public function __construct(
         ObjectManager $userManager,
         ChannelContextInterface $channelContext,
+        SlugGeneratorInterface $slugGenerator,
         RepositoryInterface $vendorsRepository,
         FactoryInterface $vendorsFactory
     ) {
         $this->userManager          = $userManager;
         $this->channelContext       = $channelContext;
+        $this->slugGenerator        = $slugGenerator;
         $this->vendorsRepository    = $vendorsRepository;
         $this->vendorsFactory       = $vendorsFactory;
     }
@@ -63,9 +69,22 @@ final class UserRegistrationListener
     
     private function createVendorForUser( ShopUserInterface $user, ChannelInterface $channel ): void
     {
+        $shopName   = \sprintf( '%s Shop', \ucfirst( $user->getUsername() ) );
         $vendor = $this->vendorsFactory->createNew();
         
+        $vendor->setName( $shopName );
+        $vendor->setSlug( $this->slugGenerator->generate( $shopName ) );
+        $vendor->setEmail( $user->getEmail() );
+        //$vendor->setlogoFile(  );
+        
+        $vendor->addChannel( $channel );
+        $vendor->setEnabled( false );
+        
+        $this->userManager->persist( $vendor );
+        
+        $user->setVendor( $vendor );
         $this->userManager->persist( $user );
+        
         $this->userManager->flush();
     }
 }
