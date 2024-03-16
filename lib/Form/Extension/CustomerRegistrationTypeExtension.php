@@ -6,7 +6,7 @@ use Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerRegistrationType;
 
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-use Vankosoft\SyliusMultiVendor\Component\Customer;
+use Vankosoft\SyliusMultiVendor\Component\MultiVendorShopUserContext;
 
 final class CustomerRegistrationTypeExtension extends AbstractTypeExtension
 {
@@ -16,12 +16,12 @@ final class CustomerRegistrationTypeExtension extends AbstractTypeExtension
             ->add( 'customerType', ChoiceType::class, [
                 'label'     => 'sylius.form.register.customer_type',
                 
-                'choices'       => \array_flip( Customer::CUSTOMER_TYPES ),
-                'data'          => \array_key_first( Customer::CUSTOMER_TYPES ),
+                'choices'       => \array_flip( MultiVendorShopUserContext::CUSTOMER_TYPES ),
+                'data'          => \array_key_first( MultiVendorShopUserContext::CUSTOMER_TYPES ),
                 'expanded'      => true,
                 
                 'placeholder'   => false,
-                'mapped'        => false,
+                //'mapped'        => false,
                 'required'      => false,
             ])
         ;

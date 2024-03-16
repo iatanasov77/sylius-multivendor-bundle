@@ -1,6 +1,6 @@
 <?php namespace Vankosoft\SyliusMultiVendor\Component;
 
-class Customer
+class MultiVendorShopUserContext
 {
     const TYPE_CUSTOMER     = 'customer';
     const TYPE_VENDOR       = 'vendor';
