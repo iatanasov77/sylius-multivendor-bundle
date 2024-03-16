@@ -6,7 +6,7 @@ services:
     
     Vankosoft\SyliusMultiVendor\Controller\DashboardController:
         tags: ['controller.service_arguments']
-        autowire: false
+        #autowire: false
         arguments:
             - '@doctrine'
             - '@odiseo_sylius_vendor_plugin.repository.vendor'
