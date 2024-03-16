@@ -1,0 +1,3 @@
+sylius:
+    ui:
+        multivendor_dashboard: Vendor Dashboard
