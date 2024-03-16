@@ -22,7 +22,7 @@ final class CustomerRegistrationTypeExtension extends AbstractTypeExtension
                 
                 'placeholder'   => false,
                 'mapped'        => false,
-                //'required'      => false,
+                'required'      => false,
             ])
         ;
     }
