@@ -7,7 +7,7 @@ services:
     vankosoft_sylius_multivendor.listener.user_registration:
         class: Vankosoft\SyliusMultiVendor\EventListener\UserRegistrationListener
         tags:
-            - { name: kernel.event_listener, event="sylius.customer.post_register" method="handleVendorRegistration", priority=99 }
+            - { name: kernel.event_listener, event="sylius.customer.post_register", method="handleVendorRegistration", priority=99 }
         arguments:
             - '@sylius.manager.shop_user'
             - '@sylius.context.channel'
