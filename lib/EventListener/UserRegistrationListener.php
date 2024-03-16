@@ -49,10 +49,10 @@ final class UserRegistrationListener
         $customer = $event->getSubject();
         Assert::isInstanceOf( $customer, CustomerInterface::class );
         
-        $user = $customer->getUser();
-        Assert::isInstanceOf( $user, ShopUserInterface::class );
+//         $user = $customer->getUser();
+//         Assert::isInstanceOf( $user, ShopUserInterface::class );
         
-        if ( $user->getCustomerType() == MultiVendorShopUserContext::TYPE_VENDOR ) {
+        if ( $customer->getCustomerType() == MultiVendorShopUserContext::TYPE_VENDOR ) {
             /** @var ChannelInterface $channel */
             $channel = $this->channelContext->getChannel();
             if ( ! $channel->isAccountVerificationRequired() ) {
@@ -63,18 +63,18 @@ final class UserRegistrationListener
                 $channel->setAccountVerificationRequired( true );
             }
             
-            $this->createVendorForUser( $user, $channel );
+            $this->createVendorForUser( $customer, $channel );
         }
     }
     
-    private function createVendorForUser( ShopUserInterface $user, ChannelInterface $channel ): void
+    private function createVendorForUser( CustomerInterface $customer, ChannelInterface $channel ): void
     {
-        $shopName   = \sprintf( '%s Shop', \ucfirst( $user->getUsername() ) );
+        $shopName   = \sprintf( '%s Shop', \ucfirst( $customer->getFullName() ) );
         $vendor = $this->vendorsFactory->createNew();
         
         $vendor->setName( $shopName );
         $vendor->setSlug( $this->slugGenerator->generate( $shopName ) );
-        $vendor->setEmail( $user->getEmail() );
+        $vendor->setEmail( $customer->getEmail() );
         //$vendor->setlogoFile(  );
         
         $vendor->addChannel( $channel );
@@ -82,8 +82,8 @@ final class UserRegistrationListener
         
         $this->userManager->persist( $vendor );
         
-        $user->setVendor( $vendor );
-        $this->userManager->persist( $user );
+        $customer->setVendor( $vendor );
+        $this->userManager->persist( $customer );
         
         $this->userManager->flush();
     }
