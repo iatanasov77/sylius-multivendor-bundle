@@ -17,7 +17,9 @@ final class CustomerRegistrationTypeExtension extends AbstractTypeExtension
                 'label'     => 'sylius.form.register.customer_type',
                 
                 'choices'   => \array_flip( Customer::CUSTOMER_TYPES ),
+                'data'      => \array_key_first( Customer::CUSTOMER_TYPES ),
                 'expanded'  => true,
+                
                 'mapped'    => false,
                 'required'  => false,
             ])
