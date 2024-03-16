@@ -14,7 +14,7 @@ final class CustomerRegistrationTypeExtension extends AbstractTypeExtension
     {
         $builder
             ->add( 'customerType', ChoiceType::class, [
-                'label'     => 'app.form.customer.secondary_phone_number',
+                'label'     => 'sylius.form.register.customer_type',
                 
                 'choices'   => \array_flip( Customer::CUSTOMER_TYPES ),
                 'expanded'  => true,

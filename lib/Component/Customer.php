@@ -6,7 +6,7 @@ class Customer
     const TYPE_VENDOR       = 'vendor';
     
     const CUSTOMER_TYPES    = [
-        self::TYPE_CUSTOMER => 'vs_vvp.form.video_platform_settings.video_url_type_symfony_route',
-        self::TYPE_VENDOR  => 'vs_vvp.form.video_platform_settings.video_url_type_cloud_public_url',
+        self::TYPE_CUSTOMER => 'sylius.form.register.customer',
+        self::TYPE_VENDOR   => 'sylius.form.register.vendor',
     ];
 }
