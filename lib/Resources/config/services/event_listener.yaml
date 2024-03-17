@@ -1,0 +1,28 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: true
+
+    vankosoft_sylius_multivendor.listener.user_registration:
+        class: Vankosoft\SyliusMultiVendor\EventListener\UserRegistrationListener
+        tags:
+            - { name: kernel.event_listener, event: "sylius.customer.post_register", method: "handleVendorRegistration", priority: 99 }
+        arguments:
+            - '@sylius.manager.shop_user'
+            - '@sylius.context.channel'
+            - '@sylius.generator.slug'
+            - '@odiseo_sylius_vendor_plugin.repository.vendor'
+            - '@odiseo_sylius_vendor_plugin.factory.vendor'
+            - '@odiseo_sylius_vendor_plugin.uploader.vendor_logo'
+            - '@file_locator'
+            
+    vankosoft_sylius_multivendor.menu_builder.shop.vendor_dashboard:
+        class: Vankosoft\SyliusMultiVendor\Menu\VendorDashboardMenuBuilder
+        arguments:
+            - '@knp_menu.factory'
+            - '@event_dispatcher'
+        tags:
+            - { name: knp_menu.menu_builder, method: createMenu, alias: vankosoft_sylius_multivendor.dashboard_menu }
+
+
