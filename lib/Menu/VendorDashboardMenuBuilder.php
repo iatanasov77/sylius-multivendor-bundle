@@ -32,7 +32,7 @@ final class VendorDashboardMenuBuilder
         }
         
         // Dashboard
-        menu
+        $menu
             ->addChild( 'dashboard' )
             ->setAttribute( 'template', '@SyliusMultiVendorBundle/Pages/Dashboard/Tab/_dashboard.html.twig' )
             ->setLabel( 'sylius.ui.dashboard' )

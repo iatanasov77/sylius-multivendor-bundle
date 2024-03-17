@@ -25,9 +25,18 @@ class DashboardController extends AbstractController
     
     public function index( Request $request ): Response
     {
-        $customer   = $this->getUser()->getCustomer();
+        $user   = $this->getUser();
+        if ( ! $user ) {
+            $this->redirectToRoute( 'sylius_shop_login' );
+        }
+        
+        $vendor = $user->getCustomer()->getVendor();
+        if ( ! $vendor ) {
+            $this->redirectToRoute( 'sylius_shop_login' );
+        }
+        
         return $this->render( '@SyliusMultiVendor/Pages/Dashboard/index.html.twig', [
-            'vendor'    => $customer->getVendor(),
+            'vendor'    => $vendor,
         ]);
     }
 }
