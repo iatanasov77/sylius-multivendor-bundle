@@ -1,6 +1,8 @@
 <?php namespace Vankosoft\SyliusMultiVendor\EventListener;
 
 use Symfony\Component\EventDispatcher\GenericEvent;
+use Symfony\Component\Config\FileLocatorInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -8,6 +10,8 @@ use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
+use Odiseo\SyliusVendorPlugin\Uploader\VendorLogoUploaderInterface;
+use Odiseo\SyliusVendorPlugin\Entity\VendorInterface;
 use Doctrine\Persistence\ObjectManager;
 use Webmozart\Assert\Assert;
 
@@ -30,18 +34,28 @@ final class UserRegistrationListener
     /** @var FactoryInterface */
     private $vendorsFactory;
     
+    /** @var VendorLogoUploaderInterface */
+    private $vendorUploader;
+    
+    /** @var FileLocatorInterface */
+    private $fileLocator;
+    
     public function __construct(
         ObjectManager $userManager,
         ChannelContextInterface $channelContext,
         SlugGeneratorInterface $slugGenerator,
         RepositoryInterface $vendorsRepository,
-        FactoryInterface $vendorsFactory
+        FactoryInterface $vendorsFactory,
+        VendorLogoUploaderInterface $vendorUploader,
+        FileLocatorInterface $fileLocator
     ) {
         $this->userManager          = $userManager;
         $this->channelContext       = $channelContext;
         $this->slugGenerator        = $slugGenerator;
         $this->vendorsRepository    = $vendorsRepository;
         $this->vendorsFactory       = $vendorsFactory;
+        $this->vendorUploader       = $vendorUploader;
+        $this->fileLocator          = $fileLocator;
     }
     
     public function handleVendorRegistration( GenericEvent $event ): void
@@ -75,16 +89,25 @@ final class UserRegistrationListener
         $vendor->setName( $shopName );
         $vendor->setSlug( $this->slugGenerator->generate( $shopName ) );
         $vendor->setEmail( $customer->getEmail() );
-        //$vendor->setlogoFile(  );
         
         $vendor->addChannel( $channel );
         $vendor->setEnabled( false );
         
+        $this->uploadVendorLogo( $vendor );
         $this->userManager->persist( $vendor );
         
         $customer->setVendor( $vendor );
         $this->userManager->persist( $customer );
         
         $this->userManager->flush();
+    }
+    
+    private function uploadVendorLogo( VendorInterface &$vendor ): void
+    {
+        $imagePath      = $this->fileLocator->locate( '@SyliusMultiVendorBundle/Resources/media/vendor_logos/vankosoft.png' );
+        $uploadedImage  = new UploadedFile( $imagePath, \basename( $imagePath ) );
+        
+        $vendor->setlogoFile( $uploadedImage );
+        $this->vendorUploader->upload( $vendor );
     }
 }
