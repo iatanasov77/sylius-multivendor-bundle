@@ -4,12 +4,28 @@
 {% block title %}{{ header|trans }} | {{ parent() }}{% endblock %}
 
 {% block content %}
-    {#
-    {% set menu = knp_menu_get( 'vankosoft_sylius_multivendor.dashboard_menu', [], {'vendor': vendor} ) %}
-    {{ knp_menu_render( menu, {'template': '@SyliusMultiVendor/Pages/Dashboard/_menu.html.twig', 'form': form, 'vendor': vendor} ) }}
-    #}
+    <div class="ui hidden divider"></div>
+    <div class="ui two column centered stackable grid">
+        <div class="column">
+            <h1 class="ui header">
+                <i class="circular mail icon"></i>
+                <div class="content">
+                    {{ 'sylius.ui.contact_us'|trans }}
+                    <div class="sub header">{{ 'sylius.ui.use_the_contact_form_below_to_send_us_a_message'|trans }}</div>
+
+                    {{ sylius_template_event('sylius.shop.contact.request.after_content_header') }}
+                </div>
+            </h1>
+            
+            
+            {#
+            {% set menu = knp_menu_get( 'vankosoft_sylius_multivendor.dashboard_menu', [], {'vendor': vendor} ) %}
+            {{ knp_menu_render( menu, {'template': '@SyliusMultiVendor/Pages/Dashboard/_menu.html.twig', 'form': form, 'vendor': vendor} ) }}
+            #}
+            
+            {% set menu = knp_menu_get( 'vankosoft_sylius_multivendor.dashboard_menu', [], {'vendor': vendor} ) %}
+            {{ knp_menu_render( menu, {'template': '@SyliusMultiVendor/Pages/Dashboard/_menu.html.twig'} ) }}
     
-    {% set menu = knp_menu_get( 'vankosoft_sylius_multivendor.dashboard_menu', [], {'vendor': vendor} ) %}
-    {{ knp_menu_render( menu, {'template': '@SyliusMultiVendor/Pages/Dashboard/_menu.html.twig'} ) }}
-    
+        </div>
+    </div>
 {% endblock %}
