@@ -1,0 +1,9 @@
+sylius:
+    ui:
+        multivendor_dashboard: Vendor Dashboard
+        
+    form:
+        register:
+            customer_type: Customer Type
+            customer: Customer
+            vendor: Vendor

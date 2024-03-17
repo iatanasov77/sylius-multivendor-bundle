@@ -1,0 +1,5 @@
+vankosoft_sylius_multivendor_dashboard_index:
+    path: /multi-vendor/dashboard
+    controller: Vankosoft\SyliusMultiVendor\Controller\DashboardController::index
+
+
