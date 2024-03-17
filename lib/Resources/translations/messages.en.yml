@@ -1,6 +1,7 @@
 sylius:
     ui:
         multivendor_dashboard: Vendor Dashboard
+        manage_your_shop: 'Use the vendor dashboard to manage your shop products, orders etc.'
         dashboard: Dashboard
         vendor_details: Vendor Details
         orders: Orders
