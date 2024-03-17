@@ -27,12 +27,12 @@ class DashboardController extends AbstractController
     {
         $user   = $this->getUser();
         if ( ! $user ) {
-            $this->redirectToRoute( 'sylius_shop_login' );
+            return $this->redirectToRoute( 'sylius_shop_login' );
         }
         
         $vendor = $user->getCustomer()->getVendor();
         if ( ! $vendor ) {
-            $this->redirectToRoute( 'sylius_shop_login' );
+            return $this->redirectToRoute( 'sylius_shop_login' );
         }
         
         return $this->render( '@SyliusMultiVendor/Pages/Dashboard/index.html.twig', [
