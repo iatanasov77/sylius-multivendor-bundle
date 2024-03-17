@@ -23,7 +23,8 @@
     "require": {
         "php": "^8.1",
        	
-       	"vankosoft/agent-bundle": "^0.1"
+       	"vankosoft/agent-bundle": "^0.1",
+       	"odiseoteam/sylius-vendor-plugin": "^1.8"
     },
     "conflict": {
         "doctrine/doctrine-bundle": "<1.3",
