@@ -13,7 +13,7 @@ class DashboardController extends AbstractController
     protected $doctrine;
     
     /** @var RepositoryInterface */
-    protected $productRepository;
+    protected $vendorsRepository;
     
     public function __construct(
         ManagerRegistry $doctrine,
