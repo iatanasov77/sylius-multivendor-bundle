@@ -36,7 +36,6 @@
     
 {% endblock %}
 
-{#
 {% block item %}
     {%- set attributes = item.attributes %}
     {%- set classes = item.attribute('class') is not empty ? [item.attribute('class')] : [] %}
@@ -48,4 +47,3 @@
     {%- endif %}
     <a class="item{% if attributes.class is defined %} {{ attributes.class }}{% endif %}" data-tab="{{ item.name }}">{{ item.label|trans }}</a>
 {% endblock %}
-#}
