@@ -6,10 +6,10 @@
 {% block content %}
     {#
     {% set menu = knp_menu_get( 'vankosoft_sylius_multivendor.dashboard_menu', [], {'vendor': vendor} ) %}
-    {{ knp_menu_render( menu, {'template': '@SyliusMultiVendorBundle/Pages/Dashboard/_menu.html.twig', 'form': form, 'vendor': vendor} ) }}
+    {{ knp_menu_render( menu, {'template': '@SyliusMultiVendor/Pages/Dashboard/_menu.html.twig', 'form': form, 'vendor': vendor} ) }}
     #}
     
     {% set menu = knp_menu_get( 'vankosoft_sylius_multivendor.dashboard_menu', [], {'vendor': vendor} ) %}
-    {{ knp_menu_render( menu, {'template': '@SyliusMultiVendorBundle/Pages/Dashboard/_menu.html.twig'} ) }}
+    {{ knp_menu_render( menu, {'template': '@SyliusMultiVendor/Pages/Dashboard/_menu.html.twig'} ) }}
     
 {% endblock %}

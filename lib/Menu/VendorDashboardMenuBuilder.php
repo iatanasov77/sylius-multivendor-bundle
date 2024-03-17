@@ -34,7 +34,7 @@ final class VendorDashboardMenuBuilder
         // Dashboard
         $menu
             ->addChild( 'dashboard' )
-            ->setAttribute( 'template', '@SyliusMultiVendorBundle/Pages/Dashboard/Tab/_dashboard.html.twig' )
+            ->setAttribute( 'template', '@SyliusMultiVendor/Pages/Dashboard/Tab/_dashboard.html.twig' )
             ->setLabel( 'sylius.ui.dashboard' )
             ->setCurrent( true )
         ;
@@ -42,7 +42,7 @@ final class VendorDashboardMenuBuilder
         // My Vendor Details
         $menu
             ->addChild( 'details' )
-            ->setAttribute( 'template', '@SyliusMultiVendorBundle/Pages/Dashboard/Tab/_details.html.twig' )
+            ->setAttribute( 'template', '@SyliusMultiVendor/Pages/Dashboard/Tab/_details.html.twig' )
             ->setLabel( 'sylius.ui.vendor_details' )
             ->setCurrent( true )
         ;
@@ -50,14 +50,14 @@ final class VendorDashboardMenuBuilder
         // Orders
         $menu
             ->addChild( 'orders' )
-            ->setAttribute( 'template', '@SyliusMultiVendorBundle/Pages/Dashboard/Tab/_orders.html.twig' )
+            ->setAttribute( 'template', '@SyliusMultiVendor/Pages/Dashboard/Tab/_orders.html.twig' )
             ->setLabel( 'sylius.ui.orders' )
         ;
         
         // Products
         $menu
             ->addChild( 'products' )
-            ->setAttribute( 'template', '@SyliusMultiVendorBundle/Pages/Dashboard/Tab/_products.html.twig' )
+            ->setAttribute( 'template', '@SyliusMultiVendor/Pages/Dashboard/Tab/_products.html.twig' )
             ->setLabel( 'sylius.ui.products' )
         ;
         
