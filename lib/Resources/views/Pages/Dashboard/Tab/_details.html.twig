@@ -34,6 +34,8 @@
         
         {{ form_row(form.email) }}
         
+        {% include '@UiBundle/Form/Buttons/_update.html.twig' with {'paths': formButtonsPaths} %}
+        
     {{ form_end(form, {'render_rest': false}) }}
         
     </div>

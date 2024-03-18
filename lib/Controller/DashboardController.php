@@ -40,8 +40,12 @@ class DashboardController extends AbstractController
         $vendorForm = $this->createForm( VendorType::class, $vendor );
         
         return $this->render( '@SyliusMultiVendor/Pages/Dashboard/index.html.twig', [
-            'vendor'        => $vendor,
-            'vendorForm'    => $vendorForm->createView(),
+            'vendor'            => $vendor,
+            'vendorForm'        => $vendorForm->createView(),
+            
+            'formButtonsPaths'  => [
+                'cancel'    => $this->generateUrl( 'vankosoft_sylius_multivendor_dashboard_index' ),
+            ],
         ]);
     }
 }
