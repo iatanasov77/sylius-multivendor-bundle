@@ -3,24 +3,38 @@
 
     <div class="ui segment">
         
-        <table id="sylius-cart-items" class="ui very basic celled table">
-            <thead>
-            <tr>
-                <th>{{ 'sylius.ui.item'|trans }}</th>
-                <th>{{ 'sylius.ui.unit_price'|trans }}</th>
-                <th>{{ 'sylius.ui.qty'|trans }}</th>
-                <th></th>
-                <th class="right aligned">{{ 'sylius.ui.total'|trans }}</th>
-            </tr>
-            </thead>
-            <tbody>
-            {#
-                {% for key, item in cart.items %}
-                    {% include '@SyliusShop/Cart/Summary/_item.html.twig' with {'item': item, 'form': form.items[key], 'main_form': form.vars.id, 'loop_index': loop.index} %}
-                {% endfor %}
-            #}
-            </tbody>
-        </table>
+    {{ form_start(form, {'action': path('odiseo_sylius_vendor_plugin_admin_vendor_update', {'id': vendor.id}),
+        'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}
+    ) }}
+    
+        <div class="field">
+            {{ form_label(form.logoFile) }}
+            <div>
+                <label for="odiseo_vendor_logoFile" class="ui icon labeled button">
+                    <i class="cloud upload icon"></i> {{ 'sylius.ui.choose_file' | trans }}
+                </label>
+                
+                {% set logoPath = vendor.logoName | imagine_filter( 'odiseo_sylius_vendor_plugin_logo' ) %}
+                <img class="ui small bordered image" src="{{ logoPath }}" alt="{{ vendor.name }}">
+                
+                <div class="ui hidden element">
+                    {{ form_widget(form.logoFile) }}
+                </div>
+            </div>
+        </div>
+        
+        <div class="field">
+            <div class="ui toggle checkbox">
+                {{ form_label(form.enabled) }}
+                {{ form_widget(form.enabled) }}
+            </div>
+        </div>
+        
+        {{ form_row(form.name) }}
+        
+        {{ form_row(form.email) }}
+        
+    {{ form_end(form, {'render_rest': false}) }}
         
     </div>
     

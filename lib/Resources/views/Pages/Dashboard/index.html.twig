@@ -21,7 +21,7 @@
         #}
         
         {% set menu = knp_menu_get( 'vankosoft_sylius_multivendor.dashboard_menu', [], {'vendor': vendor} ) %}
-        {{ knp_menu_render( menu, {'template': '@SyliusMultiVendor/Pages/Dashboard/_menu.html.twig', 'vendor': vendor} ) }}
+        {{ knp_menu_render( menu, {'template': '@SyliusMultiVendor/Pages/Dashboard/_menu.html.twig', 'vendorForm': vendorForm, 'vendor': vendor} ) }}
     
     </div>
 {% endblock %}

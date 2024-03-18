@@ -35,9 +35,12 @@
             </div>
         #}
             <div>
-                {% for item in item.children %}
-                    {% item. %}
-                    {% include item.attribute( 'template' ) with {'vendor': options.vendor} %}
+                {% for childId, childMenu in item.children %}
+                    {% if childId == 'details' %}
+                        {% include childMenu.attribute( 'template' ) with {'form': options.vendorForm, 'vendor': options.vendor} %}
+                    {% else %}
+                        {% include childMenu.attribute( 'template' ) with {'vendor': options.vendor} %}
+                    {% endif %}
                 {% endfor %}
             </div>
             
