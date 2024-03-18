@@ -36,6 +36,7 @@
         #}
             <div>
                 {% for item in item.children %}
+                    {% item. %}
                     {% include item.attribute( 'template' ) with {'vendor': options.vendor} %}
                 {% endfor %}
             </div>

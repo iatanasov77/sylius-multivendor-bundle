@@ -7,6 +7,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Doctrine\Persistence\ManagerRegistry;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
+use Odiseo\SyliusVendorPlugin\Form\Type\VendorType;
+
 class DashboardController extends AbstractController
 {
     /** @var ManagerRegistry */
@@ -35,8 +37,11 @@ class DashboardController extends AbstractController
             return $this->redirectToRoute( 'sylius_shop_login' );
         }
         
+        $vendorForm = $this->createForm( VendorType::class, $vendor );
+        
         return $this->render( '@SyliusMultiVendor/Pages/Dashboard/index.html.twig', [
-            'vendor'    => $vendor,
+            'vendor'        => $vendor,
+            'vendorForm'    => $vendorForm->createView(),
         ]);
     }
 }
